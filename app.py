@@ -17,7 +17,7 @@ def index():
     ats = None   # important to avoid error
 
     if request.method == "POST":
-        file = request.files.get("resume")
+        file = request.files["resume"]
         job_desc = request.form.get("job_desc")
 
         if file and job_desc:
@@ -39,7 +39,7 @@ def index():
                 ats = ats_score(resume_text, job_desc)
 
             except Exception as e:
-                print("Error:", e)
+               return f"Error: {str(e)}"
 
     return render_template(
         "index.html",
@@ -50,4 +50,4 @@ def index():
     )
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=10000)
